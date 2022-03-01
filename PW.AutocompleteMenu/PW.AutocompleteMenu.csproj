@@ -2,30 +2,47 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net20;net40;net45;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net20;net40;net45;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
 
     <!-- Package properties -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>PW.AutocompleteMenu</PackageId>
+    <AssemblyName>AutocompleteMenu</AssemblyName>
+    <RootNamespace>AutocompleteMenuNS</RootNamespace>
     <Version>1.4.0</Version>
-    <Authors>Pavel Torgashov,Sullivan Vanet</Authors>
+    <Authors>Pavel Torgashov,Sullivan Vanet,Sylvain Bruyère</Authors>
     <Company>Paul Wurth S.A.</Company>
     <Description>A customizable autocomplete menu for RichTextBox, TextBox and other controls. Forked from AutocompleteMenu by Pavel Torgashov.</Description>
     <Copyright>Copyright © Pavel Torgashov, 2012-2015, pavel_torgashov@ukr.net. Copyright © Paul Wurth S.A. $([System.DateTime]::UtcNow.ToString("yyyy"))</Copyright>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/paul-wurth/PW.AutocompleteMenu</RepositoryUrl>
     <PackageProjectUrl>https://www.codeproject.com/Articles/365974/Autocomplete-Menu</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
 
     <!-- Build metadata -->
     <SourceRevisionId Condition="'$(CIBuildId)' == ''">dev.$([System.Environment]::UserName).$([System.DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssK"))</SourceRevisionId>
     <SourceRevisionId Condition="'$(CIBuildId)' != ''">ci.$(CIBuildId)</SourceRevisionId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net20' or '$(TargetFramework)' == 'net40' or '$(TargetFramework)' == 'net45'">
     <Reference Include="System.Design" />
     <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
