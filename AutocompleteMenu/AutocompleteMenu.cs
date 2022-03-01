@@ -343,9 +343,10 @@ namespace AutocompleteMenuNS
         {
             if (menu != null)
             {
-                if (WrapperByControls.ContainsKey(control))
-                    return;
-                var wrapper = menu.CreateWrapper(control);
+                var wrapper = WrapperByControls.ContainsKey(control)
+                    ? WrapperByControls[control]
+                    : menu.CreateWrapper(control);
+
                 if (wrapper == null) return;
                 //
                 if(control.IsHandleCreated)
