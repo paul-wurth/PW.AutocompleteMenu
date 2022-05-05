@@ -1,0 +1,60 @@
+# Continuous Integration (CI) and Continuous Delivery (CD) for PW.AutocompleteMenu
+
+# Triggered when pushing to the "master" or "develop" branch
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - develop
+  paths:
+    exclude:
+    - .gitignore
+    - COPYING
+    - COPYING.LESSER
+    - README.md
+
+# Triggered when opening a pull request (or pushing changes to it)
+pr:
+  branches:
+    include:
+    - '*'
+  paths:
+    exclude:
+    - .gitignore
+    - COPYING
+    - COPYING.LESSER
+    - README.md
+
+# Use templates from the Utilities/PipelinesTemplates repository
+resources:
+  repositories:
+  - repository: PipelinesTemplates
+    type: git
+    name: Utilities/PipelinesTemplates
+
+# Pipeline name
+name: PW.AutocompleteMenu.$(Build.BuildId)
+
+stages:
+- stage: Build
+  jobs:
+  - template: /DotNet/Build+Test.yml@PipelinesTemplates
+    parameters:
+      projectTitle: PW.AutocompleteMenu
+      vmImage: windows-latest
+      libraryTitle: Libraries
+      libraryProjects: |
+        **/PW.AutocompleteMenu/*.csproj
+
+# Only publish package(s) from the main, master or a release branch
+- ${{ if or(in(variables['Build.SourceBranch'], 'refs/heads/main', 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')) }}:
+  - stage: Publish
+    jobs:
+    - template: /DotNet/PublishNuGet.yml@PipelinesTemplates
+      parameters:
+        projectTitle: PW.AutocompleteMenu
+        packageTitle: Packages
+        environment: Publish-PW_AutocompleteMenu-Env
+        packagesToPublish: |
+          **/PW.AutocompleteMenu.*.nupkg
