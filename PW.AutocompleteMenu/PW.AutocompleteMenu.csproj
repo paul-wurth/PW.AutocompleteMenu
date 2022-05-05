@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net20;net40;net45;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net6.0-windows</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>

@@ -3,14 +3,14 @@
 A customizable autocomplete menu for WinForms `RichTextBox`, `TextBox` and other controls.  
 It allows you to easily embed drop-down hints into any `TextBox` control on your form.
 
-Forked from [this project](https://www.codeproject.com/Articles/365974/Autocomplete-Menu) by Pavel Torgashov to add support for .NET Core/5+.
+Forked from [this project](https://www.codeproject.com/Articles/365974/Autocomplete-Menu) by Pavel Torgashov to add support for .NET 6+.
 
 ![AutocompleteMenu Sample](https://www.codeproject.com/KB/menus/365974/AutocompleteMenu.png)
 ![AutocompleteMenu Animated sample](https://www.codeproject.com/KB/menus/365974/am.gif)
 
 Supported platforms:
-- .NET Core 3.1 and .NET 5+
-- .NET Framework 2.x, 3.x and 4.x
+- .NET 6+
+- .NET Framework 4.x
 
 ## Features
 
